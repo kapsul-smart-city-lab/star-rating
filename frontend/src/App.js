@@ -63,11 +63,17 @@ function App() {
                     comment: comment
                   }
 
-                  axios.post('http://localhost:5000/api/comment', data).then(res => {
-                    console.log(res.data)
-                    // setSubmitDisabled(false)
-                  })
+                  // console.log(data, 'local')
 
+                  axios.post('http://localhost:5000/api/comment', data).
+                  then(res=>{
+                      console.log('res')
+                      console.log(res.data)
+                  }).
+                  catch(e=>{
+                    console.log('err')
+                    console.log(e.response.data)
+                  })
                 }}
               >
                 Gönder
