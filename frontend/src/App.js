@@ -5,6 +5,21 @@ import Kapsul from "../src/assets/icons/Kapsul";
 
 import Plot from "react-plotly.js";
 
+function sleep(ms) {
+  var start = new Date().getTime(), expire = start + ms;
+  while (new Date().getTime() < expire) { }
+  return;
+}
+
+var stars
+
+axios.get('http://localhost:5000/api/count').catch(console.log).then(res => {
+  stars = res
+  console.log(stars.data)
+})
+
+sleep(100)
+
 function App() {
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [submit, setSubmit] = useState(false);
@@ -69,7 +84,7 @@ function App() {
                         submitDisabled === true
                           ? "hidden "
                           : "inline-flex " +
-                            "justify-center relative -top-1 -left-1 w-36 rounded-xl bg-blue-600 hover:bg-blue-700 py-2.5 px-5 font-medium uppercase text-white transition-all before:absolute before:top-1 before:left-1 before:-z-10 before:h-full before:w-full before:border-[#005FAB]/10 before:transition-all before:content-[''] hover:top-0 hover:left-0 before:hover:top-0 before:hover:left-0 "
+                          "justify-center relative -top-1 -left-1 w-36 rounded-xl bg-blue-600 hover:bg-blue-700 py-2.5 px-5 font-medium uppercase text-white transition-all before:absolute before:top-1 before:left-1 before:-z-10 before:h-full before:w-full before:border-[#005FAB]/10 before:transition-all before:content-[''] hover:top-0 hover:left-0 before:hover:top-0 before:hover:left-0 "
                       }
                       disabled={submitDisabled}
                       onClick={() => {
@@ -103,7 +118,7 @@ function App() {
                         submitDisabled === false
                           ? "hidden "
                           : "inline-flex " +
-                            "justify-center relative -top-1 -left-1 w-36 rounded-xl bg-blue-600 py-2.5 px-5 font-medium uppercase text-white transition-all before:absolute before:top-1 before:left-1 before:-z-10 before:h-full before:w-full before:border-[#005FAB]/10 before:transition-all before:content-[''] hover:top-0 hover:left-0 before:hover:top-0 before:hover:left-0 "
+                          "justify-center relative -top-1 -left-1 w-36 rounded-xl bg-blue-600 py-2.5 px-5 font-medium uppercase text-white transition-all before:absolute before:top-1 before:left-1 before:-z-10 before:h-full before:w-full before:border-[#005FAB]/10 before:transition-all before:content-[''] hover:top-0 hover:left-0 before:hover:top-0 before:hover:left-0 "
                       }
                       disabled={!submitDisabled}
                     >
@@ -224,19 +239,12 @@ function App() {
             </div>
           </div>
         )}
-        {/* <Plot
+        <Plot
           data={[
-            {
-              x: [1, 2, 3],
-              y: [2, 6, 3],
-              type: "scatter",
-              mode: "lines+markers",
-              marker: { color: "red" },
-            },
-            { type: "bar", x: [1, 2, 3], y: [2, 5, 3] },
+            { type: "bar", x: Object.keys(stars.data), y: Object.values(stars.data) },
           ]}
-          layout={{ width: 512, height: 512, title: "A Fancy Plot"}}
-        /> */}
+          layout={{ width: 512, height: 512, title: "Oylar" }}
+        />
       </div>
     </>
   );

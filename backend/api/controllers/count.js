@@ -3,7 +3,7 @@ const  CommentController  = require('./comment');
 function countRates(data) {
     const counts = {};
     data.forEach((item) => {
-      const rate = item.rate;
+      const rate = Math.ceil(item.rate);
       if (!counts[rate]) {
         counts[rate] = 1;
       } else {
