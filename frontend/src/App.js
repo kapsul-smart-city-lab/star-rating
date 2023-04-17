@@ -256,7 +256,7 @@ function App() {
               width: 512,
               height: 512,
               title: "Oylar",
-              paper_bgcolor: "rgba(0,0,0,0)",
+              paper_bgcolor: "rgb(41,41,41)",
               plot_bgcolor: "rgb(41,41,41)",
             }}
           />
